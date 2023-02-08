@@ -1,0 +1,17 @@
+{
+	"name": "ammarjaleelportfolio",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "^2.0.8",
+		"astro-icon": "^0.8.0",
+		"firebase-tools": "^11.22.0"
+	}
+}
