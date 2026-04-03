@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roller Claw — Ammar Jaleel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090d; --bg-raised: #0d0f14; --bg-card: #11131a;
+    --border: #1a1d27; --border-light: #252838;
+    --text: #e4e6ed; --text-dim: #8a8ea0; --text-muted: #4a4e63;
+    --accent: #4d8df5; --accent-bright: #6ba3ff; --accent-dim: #2d5aa0;
+    --accent-glow: rgba(77,141,245,0.12); --cyan: #47d4cf; --orange: #f5884d; --white: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:var(--border-light) var(--bg); }
+  body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+  .grid-bg { position:fixed; inset:0; background-image:linear-gradient(rgba(77,141,245,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(77,141,245,0.02) 1px,transparent 1px); background-size:64px 64px; pointer-events:none; z-index:0; }
+  .grid-bg::after { content:''; position:fixed; inset:0; background:radial-gradient(ellipse at 15% 0%,rgba(77,141,245,0.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 100%,rgba(71,212,207,0.03) 0%,transparent 55%); pointer-events:none; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 48px; height:64px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(24px) saturate(1.2); background:rgba(8,9,13,0.82); border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--accent); letter-spacing:3px; text-transform:uppercase; text-decoration:none; }
+  .nav-links { display:flex; gap:36px; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.3s; }
+  .nav-links a:hover { color:var(--accent-bright); }
+
+  .container { max-width:1200px; margin:0 auto; padding:0 48px; }
+
+  .project-hero { padding:140px 0 80px; position:relative; z-index:1; }
+  .project-back { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); text-decoration:none; letter-spacing:1px; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color 0.3s; }
+  .project-back:hover { color:var(--accent-bright); }
+  .project-hero-tags { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .project-hero-tag { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px; border:1px solid var(--accent-dim); border-radius:2px; background:var(--accent-glow); }
+  .project-hero-title { font-size:clamp(40px,6vw,72px); font-weight:700; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
+  .project-hero-subtitle { font-size:18px; color:var(--text-dim); line-height:1.6; max-width:700px; font-weight:300; }
+
+  .project-image { position:relative; z-index:1; margin-bottom:80px; }
+  .project-image img { width:100%; max-height:520px; object-fit:cover; border-radius:3px; border:1px solid var(--border); display:block; }
+
+  .project-content { position:relative; z-index:1; padding-bottom:100px; }
+  .project-layout { display:grid; grid-template-columns:280px 1fr; gap:64px; }
+
+  .project-sidebar { position:sticky; top:96px; align-self:start; }
+  .spec-group { margin-bottom:32px; }
+  .spec-group-title { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .spec-item { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; }
+  .spec-label { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
+  .spec-value { font-size:13px; font-weight:500; color:var(--text); text-align:right; }
+
+  .project-body-text h2 { font-size:24px; font-weight:600; letter-spacing:-0.5px; margin:48px 0 16px; color:var(--white); }
+  .project-body-text h2:first-child { margin-top:0; }
+  .project-body-text p { font-size:15px; line-height:1.8; color:var(--text-dim); margin-bottom:16px; }
+  .project-body-text .highlight { color:var(--cyan); font-family:'DM Mono',monospace; font-weight:500; font-size:14px; }
+
+  .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
+  .project-nav-link { text-decoration:none; color:var(--text-dim); transition:color 0.3s; }
+  .project-nav-link:hover { color:var(--accent-bright); }
+  .project-nav-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+  .project-nav-title { font-size:18px; font-weight:600; }
+
+  footer { padding:32px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:1px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { opacity:0; animation:fadeUp 0.7s ease forwards; }
+  .fade-in-1 { animation-delay:0.1s; } .fade-in-2 { animation-delay:0.2s; }
+  .fade-in-3 { animation-delay:0.3s; } .fade-in-4 { animation-delay:0.4s; }
+  .fade-in-5 { animation-delay:0.5s; }
+
+  @media(max-width:900px) { .project-layout{grid-template-columns:1fr;} .project-sidebar{position:static;} }
+  @media(max-width:768px) { nav{padding:0 20px;} .container{padding:0 20px;} .nav-links{gap:18px;} .nav-links a{font-size:10px;} .footer-inner{flex-direction:column;gap:8px;} }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <a href="index.html" class="nav-logo">AMJ</a>
+  <ul class="nav-links">
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<section class="project-hero">
+  <div class="container">
+    <a href="index.html#projects" class="project-back fade-in fade-in-1">← Back to Projects</a>
+    <div class="project-hero-tags fade-in fade-in-2"><span class="project-hero-tag">Pneumatics</span><span class="project-hero-tag">Mechanism Design</span><span class="project-hero-tag">Simulation</span><span class="project-hero-tag">FRC 2019</span></div>
+    <h1 class="project-hero-title fade-in fade-in-3">Roller Claw</h1>
+    <p class="project-hero-subtitle fade-in fade-in-4">A hybrid pneumatic-electric intake mechanism using compliant silicone roller contact surfaces and variable-geometry jaw actuation for reliable multi-shape game piece acquisition under dynamic loading.</p>
+  </div>
+</section>
+<div class="project-image fade-in fade-in-5"><div class="container"><img src="https://ammarjaleel.com/assets/stock-3.jpg" alt="FRC 2019 Roller Claw Intake"/></div></div>
+<section class="project-content">
+  <div class="container">
+    <div class="project-layout">
+      <aside class="project-sidebar">
+        <div class="spec-group"><div class="spec-group-title">Specifications</div><div class="spec-item"><span class="spec-label">Jaw Actuation</span><span class="spec-value">Double-Acting Pneu.</span></div><div class="spec-item"><span class="spec-label">Roller Drive</span><span class="spec-value">BAG Motor</span></div><div class="spec-item"><span class="spec-label">Roller Material</span><span class="spec-value">40A Silicone</span></div><div class="spec-item"><span class="spec-label">Frame</span><span class="spec-value">Polycarbonate</span></div><div class="spec-item"><span class="spec-label">Game Pieces</span><span class="spec-value">Balls + Disks</span></div></div>
+        <div class="spec-group"><div class="spec-group-title">Pneumatics</div><div class="spec-item"><span class="spec-label">Cylinder</span><span class="spec-value">3/4″ Bore × 3″</span></div><div class="spec-item"><span class="spec-label">Pressure</span><span class="spec-value">60 PSI operating</span></div><div class="spec-item"><span class="spec-label">Valve</span><span class="spec-value">12V Solenoid</span></div><div class="spec-item"><span class="spec-label">Cycle Time</span><span class="spec-value">~150 ms</span></div></div>
+        <div class="spec-group"><div class="spec-group-title">Tools Used</div><div class="spec-item"><span class="spec-label">CAD</span><span class="spec-value">SOLIDWORKS</span></div><div class="spec-item"><span class="spec-label">Fabrication</span><span class="spec-value">CNC Router, 3D Print</span></div><div class="spec-item"><span class="spec-label">Simulation</span><span class="spec-value">Motion Study</span></div></div>
+      </aside>
+      <div class="project-body-text">
+        <h2>Design Problem</h2>
+        <p>The FRC 2019 game required robots to manipulate two geometrically distinct game pieces — a 13″ diameter inflatable rubber ball and a thin, rigid polycarbonate disk — using a single intake mechanism. The primary design challenge was developing a gripper that could conform to both the compliant spherical surface of the ball and the flat rigid edge of the disk while generating sufficient normal force for secure retention during high-acceleration robot maneuvers.</p>
+        <p>A conventional rigid-jaw gripper was rejected early in the concept phase because the clamping force required to secure the ball would risk puncture, while a force level safe for the ball would provide inadequate grip on the low-friction polycarbonate disk. This drove the selection of a roller-based contact strategy that uses continuous surface velocity to centralize game pieces rather than relying solely on static clamping force.</p>
+        <h2>Roller Grasping Mechanism</h2>
+        <p>The intake employs two parallel banks of counter-rotating rollers — three per bank — arranged in an opposing-pair configuration. The rollers are machined from aluminum cores with <span class="highlight">40A durometer silicone</span> sleeves vulcanized to the outer surface. The silicone durometer was selected through empirical testing across 30A–60A compounds to maximize the coefficient of friction on both rubber (ball) and polycarbonate (disk) surfaces while maintaining sufficient resilience to conform around the ball's curvature without permanent deformation.</p>
+        <p>When a game piece enters the intake zone, the spinning rollers generate inward tangential forces that draw the piece to a centered equilibrium position between the upper and lower banks. This "active centering" behavior means the mechanism is tolerant of off-axis approaches — the rollers will self-correct misalignment up to approximately <span class="highlight">±30° off centerline</span>, significantly increasing acquisition reliability in match conditions.</p>
+        <h2>Hybrid Pneumatic-Electric Actuation</h2>
+        <p>Jaw open/close is actuated by a <span class="highlight">double-acting pneumatic cylinder</span> (3/4″ bore × 3″ stroke) operating at 60 PSI through a 12V solenoid valve. The pneumatic actuation provides near-instantaneous jaw state changes (<span class="highlight">~150 ms</span> full stroke) with a consistent clamping force independent of motor current or battery voltage — critical for end-of-match scenarios when battery sag affects motor performance.</p>
+        <p>Roller rotation is driven by a single BAG motor (149:1 gearbox reduction) through a bevel gear transfer that distributes torque to all six rollers via a synchronized timing belt loop. The motor runs at a constant speed during intake mode, providing continuous inward surface velocity of approximately 2.5 m/s at the roller contact point. During eject mode, the motor direction reverses to push the game piece out of the gripper.</p>
+        <h2>Structural Design & Iteration</h2>
+        <p>The main frame is CNC-routed from 1/4″ polycarbonate sheet, chosen for its high impact strength (important for an intake that regularly contacts field elements and other robots) and optical transparency, which allows visual inspection of game piece seating without disassembly. Roller axle bores were reamed to +0.001″ tolerance to ensure smooth bearing press-fits.</p>
+        <p>Three design iterations were completed over a four-week development cycle. The primary iteration variable was roller spacing — the gap between upper and lower roller banks had to be optimized as a compromise between secure ball retention (favoring a tighter gap) and reliable disk entry (favoring a wider gap). The final gap dimension was set at <span class="highlight">11.5″</span>, validated through repeated pick-and-place trials across all approach angles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container"><div class="project-nav">
+  <a href="project-turret.html" class="project-nav-link"><div class="project-nav-label">← Previous</div><div class="project-nav-title">3D Printed Turret</div></a>
+  <a href="project-battery-door.html" class="project-nav-link" style="text-align:right;"><div class="project-nav-label">Next →</div><div class="project-nav-title">Battery Door Mechanism</div></a>
+</div></div>
+<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span><span>Designed with precision.</span></div></footer>
+</body>
+</html>

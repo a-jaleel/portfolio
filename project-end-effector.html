@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 DOF End Effector — Ammar Jaleel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090d; --bg-raised: #0d0f14; --bg-card: #11131a;
+    --border: #1a1d27; --border-light: #252838;
+    --text: #e4e6ed; --text-dim: #8a8ea0; --text-muted: #4a4e63;
+    --accent: #4d8df5; --accent-bright: #6ba3ff; --accent-dim: #2d5aa0;
+    --accent-glow: rgba(77,141,245,0.12); --cyan: #47d4cf; --orange: #f5884d; --white: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:var(--border-light) var(--bg); }
+  body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+  .grid-bg { position:fixed; inset:0; background-image:linear-gradient(rgba(77,141,245,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(77,141,245,0.02) 1px,transparent 1px); background-size:64px 64px; pointer-events:none; z-index:0; }
+  .grid-bg::after { content:''; position:fixed; inset:0; background:radial-gradient(ellipse at 15% 0%,rgba(77,141,245,0.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 100%,rgba(71,212,207,0.03) 0%,transparent 55%); pointer-events:none; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 48px; height:64px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(24px) saturate(1.2); background:rgba(8,9,13,0.82); border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--accent); letter-spacing:3px; text-transform:uppercase; text-decoration:none; }
+  .nav-links { display:flex; gap:36px; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.3s; }
+  .nav-links a:hover { color:var(--accent-bright); }
+
+  .container { max-width:1200px; margin:0 auto; padding:0 48px; }
+
+  .project-hero { padding:140px 0 80px; position:relative; z-index:1; }
+  .project-back { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); text-decoration:none; letter-spacing:1px; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color 0.3s; }
+  .project-back:hover { color:var(--accent-bright); }
+  .project-hero-tags { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .project-hero-tag { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px; border:1px solid var(--accent-dim); border-radius:2px; background:var(--accent-glow); }
+  .project-hero-title { font-size:clamp(40px,6vw,72px); font-weight:700; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
+  .project-hero-subtitle { font-size:18px; color:var(--text-dim); line-height:1.6; max-width:700px; font-weight:300; }
+
+  .project-image { position:relative; z-index:1; margin-bottom:80px; }
+  .project-image img { width:100%; max-height:520px; object-fit:cover; border-radius:3px; border:1px solid var(--border); display:block; }
+
+  .project-content { position:relative; z-index:1; padding-bottom:100px; }
+  .project-layout { display:grid; grid-template-columns:280px 1fr; gap:64px; }
+
+  .project-sidebar { position:sticky; top:96px; align-self:start; }
+  .spec-group { margin-bottom:32px; }
+  .spec-group-title { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .spec-item { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; }
+  .spec-label { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
+  .spec-value { font-size:13px; font-weight:500; color:var(--text); text-align:right; }
+
+  .project-body-text h2 { font-size:24px; font-weight:600; letter-spacing:-0.5px; margin:48px 0 16px; color:var(--white); }
+  .project-body-text h2:first-child { margin-top:0; }
+  .project-body-text p { font-size:15px; line-height:1.8; color:var(--text-dim); margin-bottom:16px; }
+  .project-body-text .highlight { color:var(--cyan); font-family:'DM Mono',monospace; font-weight:500; font-size:14px; }
+
+  .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
+  .project-nav-link { text-decoration:none; color:var(--text-dim); transition:color 0.3s; }
+  .project-nav-link:hover { color:var(--accent-bright); }
+  .project-nav-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+  .project-nav-title { font-size:18px; font-weight:600; }
+
+  footer { padding:32px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:1px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { opacity:0; animation:fadeUp 0.7s ease forwards; }
+  .fade-in-1 { animation-delay:0.1s; } .fade-in-2 { animation-delay:0.2s; }
+  .fade-in-3 { animation-delay:0.3s; } .fade-in-4 { animation-delay:0.4s; }
+  .fade-in-5 { animation-delay:0.5s; }
+
+  @media(max-width:900px) { .project-layout{grid-template-columns:1fr;} .project-sidebar{position:static;} }
+  @media(max-width:768px) { nav{padding:0 20px;} .container{padding:0 20px;} .nav-links{gap:18px;} .nav-links a{font-size:10px;} .footer-inner{flex-direction:column;gap:8px;} }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <a href="index.html" class="nav-logo">AMJ</a>
+  <ul class="nav-links">
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<section class="project-hero">
+  <div class="container">
+    <a href="index.html#projects" class="project-back fade-in fade-in-1">← Back to Projects</a>
+    <div class="project-hero-tags fade-in fade-in-2"><span class="project-hero-tag">Mechanism Design</span><span class="project-hero-tag">Brushless Motor</span><span class="project-hero-tag">Linear Actuation</span><span class="project-hero-tag">FRC 2023</span></div>
+    <h1 class="project-hero-title fade-in fade-in-3">3 DOF End Effector</h1>
+    <p class="project-hero-subtitle fade-in fade-in-4">A linearly actuated robotic manipulator providing pitch, roll, and grip degrees of freedom through a hybrid servo and brushless motor drive architecture on a low-friction Delrin bearing carriage.</p>
+  </div>
+</section>
+<div class="project-image fade-in fade-in-5"><div class="container"><img src="https://ammarjaleel.com/assets/stock-1.jpg" alt="3DOF Claw designed for the FRC 2023 game"/></div></div>
+<section class="project-content">
+  <div class="container">
+    <div class="project-layout">
+      <aside class="project-sidebar">
+        <div class="spec-group"><div class="spec-group-title">Specifications</div><div class="spec-item"><span class="spec-label">DOF</span><span class="spec-value">3 (Pitch, Roll, Grip)</span></div><div class="spec-item"><span class="spec-label">Frame</span><span class="spec-value">6061-T6 Aluminum</span></div><div class="spec-item"><span class="spec-label">Carriage</span><span class="spec-value">Delrin + Bearings</span></div><div class="spec-item"><span class="spec-label">Linear Drive</span><span class="spec-value">Brushless + Chain</span></div><div class="spec-item"><span class="spec-label">Articulation</span><span class="spec-value">Servo Motors</span></div></div>
+        <div class="spec-group"><div class="spec-group-title">Tools Used</div><div class="spec-item"><span class="spec-label">CAD</span><span class="spec-value">SOLIDWORKS</span></div><div class="spec-item"><span class="spec-label">Fabrication</span><span class="spec-value">CNC Mill, 3D Print</span></div><div class="spec-item"><span class="spec-label">Analysis</span><span class="spec-value">Ansys Static</span></div></div>
+        <div class="spec-group"><div class="spec-group-title">Application</div><div class="spec-item"><span class="spec-label">Competition</span><span class="spec-value">FRC 2023</span></div><div class="spec-item"><span class="spec-label">Game Pieces</span><span class="spec-value">Cones + Cubes</span></div></div>
+      </aside>
+      <div class="project-body-text">
+        <h2>Kinematic Architecture</h2>
+        <p>The end effector provides three controlled degrees of freedom arranged in a serial kinematic chain: a prismatic (linear) joint for extension/retraction, a revolute joint for wrist pitch, and a second revolute joint for wrist roll. The grip action — opening and closing the claw fingers — is mechanically coupled to a cam profile on the roll axis, so the system achieves four distinct motions from three independently actuated joints.</p>
+        <p>This kinematic arrangement was specifically designed for the FRC 2023 game, which required robots to pick and place both conical and cubic game pieces at variable-height scoring nodes. The pitch joint provides the ability to tilt the gripper to match node angles, while the roll joint orients the claw to align with cone geometry regardless of approach direction.</p>
+        <h2>Structural Frame & Carriage</h2>
+        <p>The primary structure uses <span class="highlight">6061-T6 aluminum tube</span> as the boom element, selected for its bending stiffness-to-weight ratio at the required span lengths. The tube cross-section was sized through hand calculations for maximum tip deflection under full payload at maximum extension, targeting less than <span class="highlight">5 mm deflection</span> at the end effector with a 2× safety factor on yield.</p>
+        <p>The carriage rides inside the aluminum tube on four Delrin guide blocks fitted with sealed ball bearings, forming a linear bushing that constrains five of six spatial DOF and leaves only the prismatic extension axis free. The Delrin-on-aluminum contact interface provides low static and dynamic friction coefficients without requiring lubrication, and the bearing preload is adjustable via set screws to eliminate carriage slop while avoiding binding.</p>
+        <h2>Actuation & Power Transmission</h2>
+        <p>Linear extension is driven by a brushless DC motor through an <span class="highlight">ANSI #25 roller chain and sprocket</span> transmission. The brushless motor was selected over a brushed alternative for its higher continuous power density and thermal headroom during sustained extension cycles. The chain-and-sprocket arrangement converts motor rotation to carriage translation with zero backlash on the tension side, and a constant-force spring tensioner on the return side maintains chain wrap under all load conditions.</p>
+        <p>Pitch and roll are each actuated by high-torque digital servo motors mounted at the wrist. The servo output shafts drive the joints through keyed spline couplings machined from steel, with hard stops set at ±110° on pitch and ±180° on roll to prevent cable wrap damage. All wiring routes through the interior of the aluminum boom tube, protecting cables from contact with field elements.</p>
+        <h2>Controls Integration</h2>
+        <p>The three-axis control runs on the robot's main RoboRIO controller with a cascaded PID loop: an outer position loop commanding the inner velocity loop on the brushless motor, and direct PWM position commands to the servos. A state machine sequences the pick-and-place cycle — approach, grip, retract, transit, extend, release — allowing the operator to execute the full cycle with a single button press while retaining manual override on each axis for edge cases.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container"><div class="project-nav">
+  <a href="project-swerve.html" class="project-nav-link"><div class="project-nav-label">← Previous</div><div class="project-nav-title">Differential Swerve Module</div></a>
+  <a href="project-turret.html" class="project-nav-link" style="text-align:right;"><div class="project-nav-label">Next →</div><div class="project-nav-title">3D Printed Turret</div></a>
+</div></div>
+<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span><span>Designed with precision.</span></div></footer>
+</body>
+</html>
