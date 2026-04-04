@@ -67,9 +67,11 @@
   .metric{color:var(--cyan);font-family:'DM Mono',monospace;font-weight:500;font-size:13px}
 
   .projects{padding:120px 0}
-  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .projects-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
   .project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:all .4s ease;display:flex;flex-direction:column;text-decoration:none;color:inherit}
   .project-card:hover{border-color:var(--accent-dim);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px var(--accent-dim)}
+  .project-card.span-3{grid-column:span 3}
+  .project-card.span-2{grid-column:span 2}
   .project-img{width:100%;height:220px;object-fit:cover;display:block;filter:brightness(.7) saturate(.8);transition:all .5s ease}
   .project-card:hover .project-img{filter:brightness(.85) saturate(1)}
   .project-body{padding:28px 32px 32px;flex:1;display:flex;flex-direction:column}
@@ -79,11 +81,9 @@
   .project-summary{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;flex:1}
   .project-cta{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:1px;display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;border-top:1px solid var(--border);transition:gap .3s}
   .project-card:hover .project-cta{gap:12px;color:var(--accent-bright)}
-  .project-card.wide{grid-column:1 / -1}
-  .project-card.wide .project-img{height:280px}
 
   .skills{padding:120px 0}
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .skill-card{padding:28px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;position:relative;overflow:hidden;transition:all .4s ease}
   .skill-card:hover{border-color:var(--accent-dim);transform:translateY(-2px)}
   .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),transparent);opacity:0;transition:opacity .4s}
@@ -93,6 +93,15 @@
   .skill-tag{font-family:'DM Mono',monospace;font-size:12px;color:var(--text-dim);padding:6px 14px;border:1px solid var(--border);border-radius:2px;transition:all .3s;background:transparent;text-decoration:none}
   .skill-tag:hover{border-color:var(--accent-dim);color:var(--text);background:var(--accent-glow)}
   a.skill-tag{cursor:pointer}
+
+  .cert-banner{margin-top:32px;padding:40px 48px;background:linear-gradient(135deg,rgba(77,141,245,0.06) 0%,rgba(71,212,207,0.04) 100%);border:1px solid var(--accent-dim);border-radius:3px;position:relative;overflow:hidden}
+  .cert-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),var(--cyan),transparent)}
+  .cert-banner-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+  .cert-banner-title{font-size:20px;font-weight:600;letter-spacing:-.3px;color:var(--white)}
+  .cert-banner-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:3px;text-transform:uppercase}
+  .cert-tags{display:flex;flex-wrap:wrap;gap:12px}
+  .cert-tag{font-family:'DM Mono',monospace;font-size:14px;color:var(--text);padding:12px 24px;border:1px solid var(--accent-dim);border-radius:3px;background:rgba(77,141,245,0.08);text-decoration:none;transition:all .3s;letter-spacing:.5px;font-weight:500}
+  .cert-tag:hover{border-color:var(--accent);color:var(--white);background:rgba(77,141,245,0.16);transform:translateY(-2px);box-shadow:0 4px 16px rgba(77,141,245,0.15)}
 
   .education{padding:120px 0}
   .edu-card{display:flex;gap:48px;padding:36px 40px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;align-items:flex-start;flex-wrap:wrap}
@@ -125,8 +134,8 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
   .reveal.visible{opacity:1;transform:translateY(0)}
 
-  @media(max-width:900px){.projects-grid{grid-template-columns:1fr}.project-card.wide{grid-column:auto}.project-card.wide .project-img{height:220px}}
-  @media(max-width:768px){nav{padding:0 20px}.container{padding:0 20px}.nav-links{gap:18px}.nav-links a{font-size:10px}.hero-side{display:none}.hero-meta{gap:24px}.exp-timeline{padding-left:28px}.exp-card{padding:24px}.exp-header{flex-direction:column}.exp-date{text-align:left}.skills-grid{grid-template-columns:1fr}.contact-links{align-items:flex-start}.edu-card{padding:24px;gap:24px}.footer-inner{flex-direction:column;gap:8px}}
+  @media(max-width:900px){.projects-grid{grid-template-columns:1fr}.project-card.span-3,.project-card.span-2{grid-column:span 1}.skills-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){nav{padding:0 20px}.container{padding:0 20px}.nav-links{gap:18px}.nav-links a{font-size:10px}.hero-side{display:none}.hero-meta{gap:24px}.exp-timeline{padding-left:28px}.exp-card{padding:24px}.exp-header{flex-direction:column}.exp-date{text-align:left}.skills-grid{grid-template-columns:1fr}.contact-links{align-items:flex-start}.edu-card{padding:24px;gap:24px}.footer-inner{flex-direction:column;gap:8px}.cert-banner{padding:28px 24px}.cert-tag{font-size:13px;padding:10px 18px}}
 </style>
 </head>
 <body>
@@ -146,11 +155,11 @@
   <div class="container hero-content">
     <div class="hero-tag">Mechanical Engineer — Hardware Development</div>
     <h1 class="hero-name">Ammar Jaleel<span class="accent">.</span></h1>
-    <p class="hero-subtitle">Building precision mechanical systems at the intersection of robotics, manufacturing, and product development.</p>
+    <p class="hero-subtitle">Building precision mechanical systems at the intersection of robotics, automation, and product development.</p>
     <div class="hero-meta">
       <div class="hero-meta-item"><span class="hero-meta-label">Current</span><span class="hero-meta-value">Amazon Robotics</span></div>
       <div class="hero-meta-item"><span class="hero-meta-label">Focus</span><span class="hero-meta-value">Hardware Development</span></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Location</span><span class="hero-meta-value">North Reading, MA</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Location</span><span class="hero-meta-value">Boston, MA</span></div>
     </div>
   </div>
   <div class="hero-side"><div class="hero-line"></div><span class="hero-scroll">Scroll</span></div>
@@ -215,7 +224,7 @@
   <div class="container">
     <div class="section-header reveal"><span class="section-number">02</span><h2 class="section-title">Projects</h2><div class="section-line"></div></div>
     <div class="projects-grid">
-      <a href="project-swerve.html" class="project-card reveal">
+      <a href="project-swerve.html" class="project-card span-3 reveal">
         <img src="assets/Differential Swerve.jpg" alt="Differential Swerve Module" class="project-img"/>
         <div class="project-body">
           <div class="project-tags"><span class="project-tag">Powertrain</span><span class="project-tag">3D Printing</span><span class="project-tag">CAD</span></div>
@@ -224,7 +233,7 @@
           <div class="project-cta">View Project →</div>
         </div>
       </a>
-      <a href="project-end-effector.html" class="project-card reveal">
+      <a href="project-end-effector.html" class="project-card span-3 reveal">
         <img src="assets/3DOF Gripper.jpg" alt="3 DOF End Effector" class="project-img"/>
         <div class="project-body">
           <div class="project-tags"><span class="project-tag">Brushless Motor</span><span class="project-tag">3D Modeling</span><span class="project-tag">Design</span></div>
@@ -233,7 +242,7 @@
           <div class="project-cta">View Project →</div>
         </div>
       </a>
-      <a href="project-turret.html" class="project-card reveal">
+      <a href="project-turret.html" class="project-card span-2 reveal">
         <img src="assets/3D Printed Turret.jpg" alt="3D Printed Turret" class="project-img"/>
         <div class="project-body">
           <div class="project-tags"><span class="project-tag">Kinematics</span><span class="project-tag">Arduino</span><span class="project-tag">Control Systems</span></div>
@@ -242,7 +251,7 @@
           <div class="project-cta">View Project →</div>
         </div>
       </a>
-      <a href="project-roller-claw.html" class="project-card reveal">
+      <a href="project-roller-claw.html" class="project-card span-2 reveal">
         <img src="assets/Roller Intake.jpg" alt="Roller Claw" class="project-img"/>
         <div class="project-body">
           <div class="project-tags"><span class="project-tag">Pneumatics</span><span class="project-tag">Design</span><span class="project-tag">Simulation</span></div>
@@ -251,12 +260,12 @@
           <div class="project-cta">View Project →</div>
         </div>
       </a>
-      <a href="project-battery-door.html" class="project-card wide reveal">
+      <a href="project-battery-door.html" class="project-card span-2 reveal">
         <img src="assets/BD ISO.jpg" alt="Battery Door Latching Mechanism" class="project-img" style="object-fit:contain;background:#b8c4d4;"/>
         <div class="project-body">
-          <div class="project-tags"><span class="project-tag">Product Design</span><span class="project-tag">Mechanism</span><span class="project-tag">DFM</span><span class="project-tag">GD&T</span></div>
-          <h3 class="project-name">Spring-Loaded Battery Door Mechanism</h3>
-          <p class="project-summary">Designed two competing latch mechanisms — a dual wedge slider and a swing arm latch — for a spring-loaded battery door in a compact stainless steel consumer electronics housing. Full force analysis, stress validation, and BOM costing at 100K+ unit volume.</p>
+          <div class="project-tags"><span class="project-tag">Product Design</span><span class="project-tag">Mechanism</span><span class="project-tag">DFM</span></div>
+          <h3 class="project-name">Battery Door Mechanism</h3>
+          <p class="project-summary">Spring-loaded latch mechanism for a compact stainless steel housing with force-direction conversion, auto-latching, and full stress validation.</p>
           <div class="project-cta">View Project →</div>
         </div>
       </a>
@@ -271,15 +280,18 @@
       <div class="skill-card reveal"><div class="skill-card-title">CAD / CAM</div><div class="skill-tags"><span class="skill-tag">SOLIDWORKS</span><span class="skill-tag">PTC Creo</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Fusion 360</span></div></div>
       <div class="skill-card reveal"><div class="skill-card-title">Analysis</div><div class="skill-tags"><span class="skill-tag">Ansys FEA</span><span class="skill-tag">MATLAB</span><span class="skill-tag">LabVIEW</span></div></div>
       <div class="skill-card reveal"><div class="skill-card-title">Manufacturing</div><div class="skill-tags"><span class="skill-tag">CNC Mill</span><span class="skill-tag">CNC Router</span><span class="skill-tag">Plasma</span><span class="skill-tag">Waterjet</span><span class="skill-tag">TIG/MIG Welding</span><span class="skill-tag">FDM / SLA 3D Print</span></div></div>
-      <div class="skill-card reveal">
-        <div class="skill-card-title">Certifications</div>
-        <div class="skill-tags">
-          <a href="https://www.solidworks.com/certifications/mechanical-design-cswp-mechanical-design" target="_blank" class="skill-tag">CSWP</a>
-          <a href="https://www.solidworks.com/sw/support/54427_ENU_HTML.htm" target="_blank" class="skill-tag">CSWA-AM</a>
-          <a href="https://www.solidworks.com/certifications/mechanical-design-cswa-mechanical-design" target="_blank" class="skill-tag">CSWA</a>
-          <span class="skill-tag">Level 1 GD&T</span>
-          <a href="https://www.osha.gov/training/outreach/" target="_blank" class="skill-tag">OSHA 10-Hour</a>
-        </div>
+    </div>
+    <div class="cert-banner reveal">
+      <div class="cert-banner-header">
+        <div class="cert-banner-title">Certifications</div>
+        <div class="cert-banner-label">Verified Credentials</div>
+      </div>
+      <div class="cert-tags">
+        <a href="https://www.solidworks.com/certifications/mechanical-design-cswp-mechanical-design" target="_blank" class="cert-tag">CSWP — Certified SOLIDWORKS Professional</a>
+        <a href="https://www.solidworks.com/certifications/mechanical-design-cswa-mechanical-design" target="_blank" class="cert-tag">CSWA — Certified SOLIDWORKS Associate</a>
+        <a href="https://www.solidworks.com/sw/support/54427_ENU_HTML.htm" target="_blank" class="cert-tag">CSWA-AM — Additive Manufacturing</a>
+        <span class="cert-tag">Level 1 GD&T Certification</span>
+        <a href="https://www.osha.gov/training/outreach/" target="_blank" class="cert-tag">OSHA 10-Hour Safety</a>
       </div>
     </div>
   </div>
@@ -314,7 +326,7 @@
     <div class="contact-inner reveal">
       <div class="contact-cta"><span class="dim">Let's build</span><br>something<br>together<span style="color:var(--accent)">.</span></div>
       <div class="contact-links">
-        <a href="mailto:jaleel.ammar@outlook.com" class="contact-link">jaleel.ammar@outlook.com</a>
+        <a href="/cdn-cgi/l/email-protection#96fcf7faf3f3fab8f7fbfbf7e4d6f9e3e2faf9f9fdb8f5f9fb" class="contact-link"><span class="__cf_email__" data-cfemail="482229242d2d2466292525293a08273d3c24272723662b2725">[email&#160;protected]</span></a>
         <a href="tel:+12145543744" class="contact-link">(214) 554-3744</a>
         <a href="https://www.linkedin.com/in/ammarmjaleel/" target="_blank" class="contact-link">LinkedIn</a>
         <a href="https://github.com/a-jaleel" target="_blank" class="contact-link">GitHub</a>
@@ -323,13 +335,10 @@
   </div>
 </section>
 
-<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span><span>Designed with precision.</span></div></footer>
+<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span></div></footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){const siblings=entry.target.parentElement.querySelectorAll('.reveal');entry.target.style.transitionDelay=`${Array.from(siblings).indexOf(entry.target)*.08}s`;entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
   const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll',()=>{let current='';sections.forEach(s=>{if(scrollY>=s.offsetTop-120)current=s.getAttribute('id')});navLinks.forEach(l=>{l.style.color=l.getAttribute('href')===`#${current}`?'var(--accent-bright)':''})});
-</script>
-</body>
-</html>
+  window.addE
