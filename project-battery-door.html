@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>Battery Door Mechanism — Ammar Jaleel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -100,7 +101,7 @@
 </section>
 <div class="project-image fade-in fade-in-5">
   <div class="container">
-    <img src="assets/BD ISO.jpg" alt="Battery Door Isometric View"/>
+    <img src="assets/Battery Door.jpg" alt="Battery Door Isometric View"/>
   </div>
 </div>
 <section class="project-content">
@@ -148,9 +149,11 @@
         <p>Both concepts share an identical hinge subsystem to enable direct comparison of the latch mechanisms alone. The door is formed from <span class="highlight">AL 5052 H32 sheet (0.9 mm)</span> with a curled barrel hinge at one edge and a 45° chamfered latch lip at the opposing edge for auto-latching. The hinge anchor is CNC-milled from alloy steel and bolted to the housing with M1.6 fasteners. The hinge pin is a 2 mm alloy steel rod with Ra 0.8 μm surface finish, serving dual roles as the rotation axis and torsion spring mount. Fits are specified as H7/g6 (free rotation) and H7/p6 (interference press-fit) at the respective interfaces.</p>
         <p>A stainless steel 304 torsion spring with 225° resting state provides the pop-open force that ejects the door when unlatched and simultaneously preloads the door in the closed position to eliminate rattle against the housing.</p>
         <h2>Mechanism 1: Dual Wedge Slider</h2>
+        <img src="assets/BD Wedge Slider.jpg" alt="Dual Wedge Slider Latch Mechanism"/>
         <p>A <span class="highlight">45° wedge interface</span> on the button converts the user's vertical press into horizontal slider retraction at a 1:1 displacement ratio. The Delrin slider engages behind the door's bent latch lip. A compression spring (SS 304, k = 0.50 N/mm, 8 mm free length) returns the slider to the latched position when the button is released. The chamfered edge on the door lip acts as a cam surface during closing — pushing the slider against its spring until the lip clears, at which point the slider snaps back to auto-latch.</p>
         <p>Wedge force analysis for a 5 N button input with 45° wedge angle and μ = 0.20 friction yields a normal force N_w = 5.89 N and net horizontal slider force F_h = 2.94 N after channel friction losses. With the compression spring preload of 1.50 N at the latched position, the system retains a <span class="highlight">0.85 N force margin</span> — sufficient to guarantee reliable unlatching across manufacturing tolerances and wear conditions.</p>
         <h2>Mechanism 2: Swing Arm Latch</h2>
+        <img src="assets/BD Swing Arm.jpg" alt="Swing Arm Latch Mechanism"/>
         <p>An injection-molded Delrin swing arm pivots around a press-fit latch pin. A cylindrical boss on the arm interfaces with the button — pressing down pivots the hook away from the door lip. The 30° angled hook enables auto-latching by deflecting as the door closes and snapping back behind the lip once cleared. This mechanism achieves a <span class="highlight">2.67× mechanical advantage</span>, requiring only 0.75 mm of button travel to produce 2.0 mm of hook displacement. It shares the hinge torsion spring (repurposed for both pop-open and hook return), reducing unique part count. The trade-off is a larger rotational envelope that consumes more internal volume than the linear slider.</p>
         <h2>Stress Validation</h2>
         <p>All critical load paths were validated analytically. The button-to-wedge contact surface in Delrin sees just 1.30 MPa against a 65 MPa yield strength (<span class="highlight">FoS = 50</span>). The door latch lip bending stress in AL 5052 H32 reaches 17.78 MPa versus 195 MPa yield (<span class="highlight">FoS = 11.0</span>). The swing arm hook in Delrin sees approximately 1.0 MPa (<span class="highlight">FoS ≈ 65</span>), and the latch pin press-fit in alloy steel reaches approximately 35 MPa (<span class="highlight">FoS ≈ 7</span>). All components pass with substantial margin.</p>
@@ -168,6 +171,6 @@
     <a href="project-swerve.html" class="project-nav-link" style="text-align:right;"><div class="project-nav-label">Next →</div><div class="project-nav-title">Differential Swerve Module</div></a>
   </div>
 </div>
-<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span><span>Designed with precision.</span></div></footer>
+<footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span></div></footer>
 </body>
 </html>
