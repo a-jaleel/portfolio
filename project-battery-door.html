@@ -36,34 +36,52 @@
   .project-hero-tags { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
   .project-hero-tag { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; padding:5px 12px; border:1px solid var(--accent-dim); border-radius:2px; background:var(--accent-glow); }
   .project-hero-title { font-size:clamp(40px,6vw,72px); font-weight:700; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
-  .project-hero-subtitle { font-size:18px; color:var(--text-dim); line-height:1.6; max-width:700px; font-weight:300; }
+  .project-hero-subtitle { font-size:18px; color:var(--text-dim); line-height:1.6; max-width:720px; font-weight:300; }
 
   .project-image { position:relative; z-index:1; margin-bottom:80px; }
-  .project-image img { width:100%; max-height:520px; object-fit:cover; border-radius:3px; border:1px solid var(--border); display:block; }
+  .project-image img { width:100%; max-height:540px; object-fit:contain; background:#aab4c6; border-radius:3px; border:1px solid var(--border); display:block; padding:24px 0; }
 
-  .project-content { position:relative; z-index:1; padding-bottom:100px; }
+  .project-content { position:relative; z-index:1; padding-bottom:80px; }
   .project-layout { display:grid; grid-template-columns:280px 1fr; gap:64px; }
 
   .project-sidebar { position:sticky; top:96px; align-self:start; }
   .spec-group { margin-bottom:32px; }
   .spec-group-title { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-  .spec-item { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; }
+  .spec-item { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; gap:12px; }
   .spec-label { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
   .spec-value { font-size:13px; font-weight:500; color:var(--text); text-align:right; }
 
   .project-body-text h2 { font-size:24px; font-weight:600; letter-spacing:-0.5px; margin:48px 0 16px; color:var(--white); }
   .project-body-text h2:first-child { margin-top:0; }
+  .project-body-text h3 { font-size:17px; font-weight:600; color:var(--accent-bright); margin:28px 0 10px; letter-spacing:-0.2px; }
   .project-body-text p { font-size:15px; line-height:1.8; color:var(--text-dim); margin-bottom:16px; }
   .project-body-text .highlight { color:var(--cyan); font-family:'DM Mono',monospace; font-weight:500; font-size:14px; }
 
-  .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
+  /* Inline figures */
+  .figure { margin:32px 0; }
+  .figure img { width:100%; border-radius:3px; border:1px solid var(--border); display:block; background:#aab4c6; }
+  .figure-caption { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; margin-top:10px; text-align:center; }
+
+  .figure-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:32px 0; }
+  .figure-grid .figure { margin:0; }
+  .figure-grid img { background:#bcc4d2; aspect-ratio: 4/3; object-fit:cover; }
+
+  .figure-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0; }
+  .figure-pair .figure { margin:0; }
+
+  /* Callout */
+  .callout { background:linear-gradient(135deg,rgba(77,141,245,0.06) 0%,rgba(71,212,207,0.04) 100%); border:1px solid var(--accent-dim); border-left:3px solid var(--accent); padding:20px 24px; border-radius:3px; margin:32px 0; }
+  .callout-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+  .callout p { font-size:14px; color:var(--text); line-height:1.7; margin:0; }
+
+  .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; gap:24px; }
   .project-nav-link { text-decoration:none; color:var(--text-dim); transition:color 0.3s; }
   .project-nav-link:hover { color:var(--accent-bright); }
   .project-nav-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
   .project-nav-title { font-size:18px; font-weight:600; }
 
   footer { padding:32px 0; border-top:1px solid var(--border); position:relative; z-index:1; }
-  .footer-inner { display:flex; justify-content:space-between; align-items:center; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:1px; }
+  .footer-inner { display:flex; justify-content:center; align-items:center; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:1px; }
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   .fade-in { opacity:0; animation:fadeUp 0.7s ease forwards; }
@@ -71,8 +89,19 @@
   .fade-in-3 { animation-delay:0.3s; } .fade-in-4 { animation-delay:0.4s; }
   .fade-in-5 { animation-delay:0.5s; }
 
-  @media(max-width:900px) { .project-layout{grid-template-columns:1fr;} .project-sidebar{position:static;} }
-  @media(max-width:768px) { nav{padding:0 20px;} .container{padding:0 20px;} .nav-links{gap:18px;} .nav-links a{font-size:10px;} .footer-inner{flex-direction:column;gap:8px;} }
+  @media(max-width:900px) {
+    .project-layout{grid-template-columns:1fr;}
+    .project-sidebar{position:static;}
+    .figure-grid{grid-template-columns:1fr;}
+    .figure-pair{grid-template-columns:1fr;}
+  }
+  @media(max-width:768px) {
+    nav{padding:0 20px;} .container{padding:0 20px;}
+    .nav-links{gap:18px;} .nav-links a{font-size:10px;}
+    .footer-inner{flex-direction:column;gap:8px;}
+    .project-nav{flex-direction:column;}
+    .project-nav-link[style*="text-align:right"]{text-align:left !important;}
+  }
 </style>
 </head>
 <body>
@@ -86,6 +115,7 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
+
 <section class="project-hero">
   <div class="container">
     <a href="index.html#projects" class="project-back fade-in fade-in-1">← Back to Projects</a>
@@ -93,17 +123,19 @@
       <span class="project-hero-tag">Product Design</span>
       <span class="project-hero-tag">Mechanism Design</span>
       <span class="project-hero-tag">DFM</span>
-      <span class="project-hero-tag">GD&T</span>
+      <span class="project-hero-tag">Subsystem Architecture</span>
     </div>
     <h1 class="project-hero-title fade-in fade-in-3">Battery Door Mechanism</h1>
-    <p class="project-hero-subtitle fade-in fade-in-4">A spring-loaded battery door mechanism for a compact stainless steel consumer electronics housing, featuring single-button release with force-direction conversion and auto-latching — developed from concept through detailed design selection with full analytical validation.</p>
+    <p class="project-hero-subtitle fade-in fade-in-4">A spring-loaded battery door latch for a compact stainless steel consumer electronics housing — engineered as a self-contained, modular subsystem with single-button release, force-direction conversion, and auto-latching behavior. Iterated from concept through analytical validation and design-for-manufacture refinement.</p>
   </div>
 </section>
+
 <div class="project-image fade-in fade-in-5">
   <div class="container">
-    <img src="assets/Battery Door.jpg" alt="Battery Door Isometric View"/>
+    <img src="assets/bd-housing-iso.png" alt="Battery Door Mechanism — Stainless Steel Housing Isometric View"/>
   </div>
 </div>
+
 <section class="project-content">
   <div class="container">
     <div class="project-layout">
@@ -117,21 +149,30 @@
           <div class="spec-item"><span class="spec-label">Flush Tolerance</span><span class="spec-value">±0.1 mm</span></div>
         </div>
         <div class="spec-group">
-          <div class="spec-group-title">Selected: Dual Wedge Slider</div>
+          <div class="spec-group-title">Selected: Wedge Slider</div>
           <div class="spec-item"><span class="spec-label">Button Travel</span><span class="spec-value">2.0 mm</span></div>
           <div class="spec-item"><span class="spec-label">Slider Travel</span><span class="spec-value">2.0 mm</span></div>
           <div class="spec-item"><span class="spec-label">Wedge Angle</span><span class="spec-value">45°</span></div>
-          <div class="spec-item"><span class="spec-label">Protrusion</span><span class="spec-value">2.25 mm</span></div>
-          <div class="spec-item"><span class="spec-label">Part Count</span><span class="spec-value">7</span></div>
-          <div class="spec-item"><span class="spec-label">Unit Cost</span><span class="spec-value">$1.45 @ 100K+</span></div>
+          <div class="spec-item"><span class="spec-label">Button Protrusion</span><span class="spec-value">~1 mm at rest</span></div>
+          <div class="spec-item"><span class="spec-label">Pressed State</span><span class="spec-value">Flush</span></div>
+          <div class="spec-item"><span class="spec-label">Slider States</span><span class="spec-value">3 (Install/Rest/Pressed)</span></div>
         </div>
         <div class="spec-group">
-          <div class="spec-group-title">Key Materials</div>
-          <div class="spec-item"><span class="spec-label">Door</span><span class="spec-value">AL 5052 H32, 0.9mm</span></div>
-          <div class="spec-item"><span class="spec-label">Slider / Button</span><span class="spec-value">Delrin (POM)</span></div>
-          <div class="spec-item"><span class="spec-label">Hinge Anchor</span><span class="spec-value">CNC Alloy Steel</span></div>
-          <div class="spec-item"><span class="spec-label">Springs</span><span class="spec-value">SS 304</span></div>
-          <div class="spec-item"><span class="spec-label">Hinge Pin</span><span class="spec-value">2mm Alloy Steel</span></div>
+          <div class="spec-group-title">Subsystem Materials</div>
+          <div class="spec-item"><span class="spec-label">Anchor Block</span><span class="spec-value">CNC Aluminum</span></div>
+          <div class="spec-item"><span class="spec-label">Slider</span><span class="spec-value">Delrin (POM)</span></div>
+          <div class="spec-item"><span class="spec-label">Button</span><span class="spec-value">Delrin (POM)</span></div>
+          <div class="spec-item"><span class="spec-label">Compression Spring</span><span class="spec-value">SS 304</span></div>
+          <div class="spec-item"><span class="spec-label">Door</span><span class="spec-value">AL 5052 H32, 0.9 mm</span></div>
+          <div class="spec-item"><span class="spec-label">Hinge Pin</span><span class="spec-value">2 mm Alloy Steel</span></div>
+          <div class="spec-item"><span class="spec-label">Torsion Spring</span><span class="spec-value">SS 304, 225° rest</span></div>
+        </div>
+        <div class="spec-group">
+          <div class="spec-group-title">Manufacturing</div>
+          <div class="spec-item"><span class="spec-label">Anchor Block</span><span class="spec-value">3-Axis CNC</span></div>
+          <div class="spec-item"><span class="spec-label">Datum Strategy</span><span class="spec-value">3 Orthogonal Faces</span></div>
+          <div class="spec-item"><span class="spec-label">Plastics</span><span class="spec-value">Injection Molded</span></div>
+          <div class="spec-item"><span class="spec-label">Fasteners</span><span class="spec-value">M1.6 (existing BOM)</span></div>
         </div>
         <div class="spec-group">
           <div class="spec-group-title">Tools Used</div>
@@ -140,37 +181,109 @@
           <div class="spec-item"><span class="spec-label">Tolerancing</span><span class="spec-value">ISO Fits (H7/g6)</span></div>
         </div>
       </aside>
+
       <div class="project-body-text">
         <h2>Design Brief</h2>
-        <p>The challenge was to design a spring-loaded battery door mechanism for the rear panel of a compact stainless steel consumer electronics enclosure (61.8 × 103.5 mm). The mechanism needed to securely retain two AA batteries while providing a single-action release: a downward button press converts into an upward door pop. Additional requirements included auto-latching (door closes and latches without user intervention), elimination of rattle in both open and closed states, flush door surface within 0.1 mm of the housing, and button protrusion no greater than 2.5 mm.</p>
+        <p>The objective was to design a spring-loaded battery door mechanism for the rear panel of a compact stainless steel consumer electronics enclosure (61.8 × 103.5 mm). The mechanism had to securely retain two AA batteries while providing a single-action release: a downward button press converts into an upward door pop. Additional constraints included auto-latching (the door closes and re-engages without user intervention), zero rattle in both open and closed states, a closed-door surface flush within 0.1 mm of the housing, and a button protrusion no greater than 2.5 mm at rest.</p>
+
         <h2>Concept Development</h2>
-        <p>Nine distinct mechanism families were evaluated during ideation — push-push cam latches, seesaw/bell-crank linkages, sliding wedge latches, bistable springs, swing roller catches, snap latches, rotating arm mechanisms, leaf springs, and magnetic holds. Benchmark research included real-world implementations in cabinet hardware, automotive compartments, and garden gate latches. Two concepts were selected for detailed development based on their compatibility with the force-direction conversion requirement (downward input → upward output): a <span class="highlight">dual wedge slider</span> and a <span class="highlight">swing arm latch</span>.</p>
-        <h2>Shared Hinge Subsystem</h2>
-        <p>Both concepts share an identical hinge subsystem to enable direct comparison of the latch mechanisms alone. The door is formed from <span class="highlight">AL 5052 H32 sheet (0.9 mm)</span> with a curled barrel hinge at one edge and a 45° chamfered latch lip at the opposing edge for auto-latching. The hinge anchor is CNC-milled from alloy steel and bolted to the housing with M1.6 fasteners. The hinge pin is a 2 mm alloy steel rod with Ra 0.8 μm surface finish, serving dual roles as the rotation axis and torsion spring mount. Fits are specified as H7/g6 (free rotation) and H7/p6 (interference press-fit) at the respective interfaces.</p>
-        <p>A stainless steel 304 torsion spring with 225° resting state provides the pop-open force that ejects the door when unlatched and simultaneously preloads the door in the closed position to eliminate rattle against the housing.</p>
-        <h2>Mechanism 1: Dual Wedge Slider</h2>
-        <!-- <img src="assets/BD Wedge Slider.jpg" alt="Dual Wedge Slider Latch Mechanism"/> -->
-        <p>A <span class="highlight">45° wedge interface</span> on the button converts the user's vertical press into horizontal slider retraction at a 1:1 displacement ratio. The Delrin slider engages behind the door's bent latch lip. A compression spring (SS 304, k = 0.50 N/mm, 8 mm free length) returns the slider to the latched position when the button is released. The chamfered edge on the door lip acts as a cam surface during closing — pushing the slider against its spring until the lip clears, at which point the slider snaps back to auto-latch.</p>
-        <p>Wedge force analysis for a 5 N button input with 45° wedge angle and μ = 0.20 friction yields a normal force N_w = 5.89 N and net horizontal slider force F_h = 2.94 N after channel friction losses. With the compression spring preload of 1.50 N at the latched position, the system retains a <span class="highlight">0.85 N force margin</span> — sufficient to guarantee reliable unlatching across manufacturing tolerances and wear conditions.</p>
-        <h2>Mechanism 2: Swing Arm Latch</h2>
-        <!-- <img src="assets/BD Swing Arm.jpg" alt="Swing Arm Latch Mechanism"/> -->
-        <p>An injection-molded Delrin swing arm pivots around a press-fit latch pin. A cylindrical boss on the arm interfaces with the button — pressing down pivots the hook away from the door lip. The 30° angled hook enables auto-latching by deflecting as the door closes and snapping back behind the lip once cleared. This mechanism achieves a <span class="highlight">2.67× mechanical advantage</span>, requiring only 0.75 mm of button travel to produce 2.0 mm of hook displacement. It shares the hinge torsion spring (repurposed for both pop-open and hook return), reducing unique part count. The trade-off is a larger rotational envelope that consumes more internal volume than the linear slider.</p>
+        <p>Nine mechanism families were evaluated during ideation — push-push cam latches, seesaw and bell-crank linkages, sliding wedge latches, bistable springs, swing roller catches, snap latches, rotating arm mechanisms, leaf springs, and magnetic holds. Benchmark research drew from real-world implementations in cabinet hardware, automotive compartments, and gate latches. Two concepts advanced to detailed design based on their compatibility with the force-direction conversion requirement: a <span class="highlight">dual wedge slider</span> and a <span class="highlight">swing arm latch</span>.</p>
+
+        <h2>Selected Mechanism: Wedge Slider</h2>
+        <p>The wedge slider was selected over the swing arm latch through a weighted decision matrix scoring it <span class="highlight">8.2 / 10</span> against 7.5 for the swing arm. Internal volume efficiency carried the highest weighting (25%) and proved decisive — the linear slider's compact footprint preserves significantly more space for the battery bay and electronics than the swing arm's rotational envelope. With seven total parts versus eight, the wedge slider also offered a simpler BOM at $1.45 per unit versus $1.62 at 100,000+ volume.</p>
+        <p>A <span class="highlight">45° wedge interface</span> on the button converts the user's vertical press into horizontal slider retraction at a 1:1 displacement ratio. The Delrin slider engages a bent latch lip on the door edge. A compression spring (SS 304, k = 0.50 N/mm, 8 mm free length) returns the slider to the latched position when the button is released. The chamfered edge on the door's latch lip acts as a cam surface during closing — pushing the slider against its spring until the lip clears, at which point the slider snaps back to auto-latch.</p>
+        <p>Wedge force analysis for a 5 N button input with μ = 0.20 friction yields a normal force of 5.89 N and a net horizontal slider force of 2.94 N after channel friction. With a compression spring preload of 1.50 N at the latched position, the system retains a <span class="highlight">0.85 N force margin</span> — sufficient to guarantee reliable unlatching across manufacturing tolerances and wear conditions.</p>
+
         <h2>Stress Validation</h2>
-        <p>All critical load paths were validated analytically. The button-to-wedge contact surface in Delrin sees just 1.30 MPa against a 65 MPa yield strength (<span class="highlight">FoS = 50</span>). The door latch lip bending stress in AL 5052 H32 reaches 17.78 MPa versus 195 MPa yield (<span class="highlight">FoS = 11.0</span>). The swing arm hook in Delrin sees approximately 1.0 MPa (<span class="highlight">FoS ≈ 65</span>), and the latch pin press-fit in alloy steel reaches approximately 35 MPa (<span class="highlight">FoS ≈ 7</span>). All components pass with substantial margin.</p>
-        <h2>Design Selection</h2>
-        <p>A weighted decision matrix across seven criteria (internal volume efficiency 25%, BOM cost 20%, tactile feel 15%, reliability 15%, part count 10%, manufacturability 10%, rattle prevention 5%) scored the Dual Wedge Slider at <span class="highlight">8.2/10</span> versus the Swing Arm Latch at 7.5/10. The linear slider's compact footprint was the decisive advantage — it occupies significantly less internal volume than the swing arm's rotational envelope, preserving space for the battery bay. At $1.45/unit versus $1.62/unit at 100K+ volume, it also carries a 12% cost advantage. The Swing Arm scored higher on manufacturability (simpler housing geometry) and user experience (lower 1.25 mm button protrusion), but these benefits did not outweigh the volume efficiency gap in this space-constrained application.</p>
-        <h2>Recommended Next Steps</h2>
-        <p>The design is positioned for detailed engineering: full tolerance stack-up analysis of all mating features, FEA-driven geometry optimization to minimize actuation force, sourcing of off-the-shelf compression and torsion springs from catalog suppliers, development of manufacturing drawings with GD&T callouts, addition of draft angles to all injection-molded components, and design of aesthetic covers to conceal the exposed mechanism elements on the housing exterior.</p>
+        <p>All critical load paths were validated analytically with substantial margin. The button-to-wedge contact in Delrin sees just 1.30 MPa against 65 MPa yield (<span class="highlight">FoS = 50</span>). The door latch lip bending stress in AL 5052 H32 reaches 17.78 MPa versus 195 MPa yield (<span class="highlight">FoS = 11.0</span>). The latch pin press-fit in alloy steel reaches approximately 35 MPa against 250 MPa yield (<span class="highlight">FoS ≈ 7</span>). The substantial safety factors across all components leave headroom for further geometry optimization or material substitution in future iterations.</p>
+
+        <h2>Subsystem Refactor</h2>
+        <p>Following initial design selection, two key modifications were introduced to improve manufacturability and reliability. First, the latch components were repackaged into a self-contained, externally-assembled <strong>modular latch subsystem</strong> built around a new machined part — the <em>latch anchor block</em>. Second, a <strong>button retention lip</strong> was added to positively retain the button when the housing is inverted. These two changes transform the mechanism from a set of loose parts assembled directly into the housing into a single drop-in module.</p>
+
+        <div class="figure">
+          <img src="assets/bd-latch-subsystem.jpg" alt="Latch subsystem with translucent anchor block showing internal slider, spring, and button"/>
+          <div class="figure-caption">Latch subsystem with the anchor block shown translucent — slider (green), spring, button (yellow)</div>
+        </div>
+
+        <h3>Latch Anchor Block</h3>
+        <p>The anchor block is machined from solid aluminum and serves as the housing for every other latch component. After the subsystem is assembled externally, the block mounts into the main housing using the same <span class="highlight">M1.6 fasteners</span> already specified in the parent assembly's BOM — adding zero new fastener SKUs. Internal features include a slider channel, a button travel channel, and a cylindrical bore for the compression spring.</p>
+
+        <h3>Manufacturability</h3>
+        <p>The anchor block geometry was deliberately constrained so all internal features reference one of three orthogonal datum faces. This allows fabrication on a standard <span class="highlight">3-axis CNC mill</span> with simple workholding reorientations between operations — no 4-axis or 5-axis tooling required. The result is significantly reduced setup time, lower tooling cost, and shorter cycle time per part compared to embedding the same features directly into the larger stainless steel housing.</p>
+
+        <div class="figure">
+          <img src="assets/bd-anchor-block.jpg" alt="Latch anchor block translucent isometric showing internal channels and bores"/>
+          <div class="figure-caption">Anchor block with internal features visible — slider channel, button travel channel, and spring bore</div>
+        </div>
+
+        <h2>Assembly Procedure</h2>
+        <p>The subsystem is built in three sequential steps. (1) The compression spring is inserted into the cylindrical bore on the side of the anchor block. (2) The slider follows from the same direction; once the spring is fully compressed, sufficient clearance opens for the next part. (3) The button drops in from the top into its channel. When the slider is released, the spring drives it forward and the slider's wedge face contacts the button's wedge face — lifting the button to its rest position. The newly-added retention lip on the button engages the underside of the slider, preventing the button from falling out when the housing is inverted.</p>
+
+        <div class="figure">
+          <img src="assets/bd-exploded.jpg" alt="Exploded view of the latch subsystem showing assembly order"/>
+          <div class="figure-caption">Exploded assembly: (1) compression spring, (2) slider, (3) button</div>
+        </div>
+
+        <h2>Slider States</h2>
+        <p>The slider operates between three distinct positions, each defined by a hard mechanical stop in the channel geometry. No external limit switches, sensors, or end-of-travel hardware is required — the channel walls themselves act as the physical stops, with different flat faces on the slider contacting different ends of the channel at each position.</p>
+
+        <div class="figure-grid">
+          <div class="figure">
+            <img src="assets/bd-state-installation.jpg" alt="Slider in installation state - fully retracted"/>
+            <div class="figure-caption">1. Installation</div>
+          </div>
+          <div class="figure">
+            <img src="assets/bd-state-rest.jpg" alt="Slider at button rest state"/>
+            <div class="figure-caption">2. Button at Rest</div>
+          </div>
+          <div class="figure">
+            <img src="assets/bd-state-pressed.png" alt="Slider with button fully pressed"/>
+            <div class="figure-caption">3. Button Pressed</div>
+          </div>
+        </div>
+
+        <h3>1. Installation</h3>
+        <p>The slider is pushed fully into the channel against the spring until it reaches the channel end. This position clears enough vertical space in the button channel for the button to be inserted from the top during assembly. The slider's flat back face contacts the back wall of the channel as the hard stop.</p>
+
+        <h3>2. Button at Rest</h3>
+        <p>With the button installed and the slider released, the spring drives the slider forward until its wedge face contacts the button's wedge face. The button rises until its retention lip contacts the underside of the slider — this lip-on-slider contact is the physical stop that defines the rest position and sets the button's rest protrusion at approximately 1 mm above the housing surface.</p>
+
+        <h3>3. Button Pressed</h3>
+        <p>Under normal user actuation, the button can be pressed downward and both wedge faces remain in continuous sliding contact. The button travels downward until the bottom face of its lip contacts the bottom of the channel — the channel depth defines this stop. At full press the button sits flush with the housing surface and the slider has retracted enough to release the door latch.</p>
+
+        <h2>Final Assembly Integration</h2>
+        <p>Integrating the latch subsystem into the housing dramatically simplifies the housing's machining requirements. Rather than requiring a complex internal channel, slider pocket, and spring bore to be machined into the stainless steel housing itself, the housing now requires only <strong>one rectangular pocket</strong> sized to receive the anchor block, plus two small through-holes for the M1.6 mounting screws.</p>
+
+        <div class="figure-pair">
+          <div class="figure">
+            <img src="assets/bd-assembly-section.png" alt="Section view showing latch subsystem installed in housing"/>
+            <div class="figure-caption">Section view — latch subsystem mounted in the stainless steel housing</div>
+          </div>
+          <div class="figure">
+            <img src="assets/bd-assembly-corner.png" alt="External corner view showing the button protrusion"/>
+            <div class="figure-caption">Exterior view — button protrudes ~1 mm at rest, sits flush when pressed</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">Design Outcome</div>
+          <p>The modular subsystem approach decouples mechanism complexity from housing manufacture: the anchor block holds all complex geometry on a small, easily-machined aluminum part, while the housing requires only a simple rectangular pocket. This split improves yield, lowers cost, and allows the latch to be quality-checked as an isolated subassembly before final integration.</p>
+        </div>
+
+        <h2>Recommendations & Next Steps</h2>
+        <p>The design is positioned for production engineering: full tolerance stack-up analysis of all mating features, FEA-driven geometry optimization to minimize actuation force, sourcing of off-the-shelf compression and torsion springs from catalog suppliers, development of detailed manufacturing drawings with full GD&T callouts, draft angle additions to all injection-molded components, and aesthetic cover design to conceal the visible mechanism elements on the housing exterior.</p>
       </div>
     </div>
   </div>
 </section>
+
 <div class="container">
   <div class="project-nav">
     <a href="project-roller-claw.html" class="project-nav-link"><div class="project-nav-label">← Previous</div><div class="project-nav-title">Roller Claw</div></a>
     <a href="project-swerve.html" class="project-nav-link" style="text-align:right;"><div class="project-nav-label">Next →</div><div class="project-nav-title">Differential Swerve Module</div></a>
   </div>
 </div>
+
 <footer><div class="container footer-inner"><span>© 2026 Ammar Jaleel</span></div></footer>
 </body>
 </html>
