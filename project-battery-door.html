@@ -74,6 +74,17 @@
   .callout-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
   .callout p { font-size:14px; color:var(--text); line-height:1.7; margin:0; }
 
+  /* Downloads */
+  .downloads { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0 32px; }
+  .download-card { display:flex; align-items:center; gap:18px; padding:20px 22px; background:var(--bg-card); border:1px solid var(--border); border-radius:3px; text-decoration:none; color:inherit; transition:all .3s ease; }
+  .download-card:hover { border-color:var(--accent-dim); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); background:rgba(77,141,245,0.04); }
+  .download-icon { width:44px; height:44px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--accent-glow); border:1px solid var(--accent-dim); border-radius:3px; color:var(--accent-bright); font-family:'DM Mono',monospace; font-size:10px; font-weight:600; letter-spacing:0.5px; }
+  .download-info { flex:1; min-width:0; }
+  .download-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:2px; }
+  .download-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
+  .download-arrow { color:var(--text-muted); font-size:16px; transition:all .3s; }
+  .download-card:hover .download-arrow { color:var(--accent-bright); transform:translateX(2px); }
+
   .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; gap:24px; }
   .project-nav-link { text-decoration:none; color:var(--text-dim); transition:color 0.3s; }
   .project-nav-link:hover { color:var(--accent-bright); }
@@ -94,6 +105,7 @@
     .project-sidebar{position:static;}
     .figure-grid{grid-template-columns:1fr;}
     .figure-pair{grid-template-columns:1fr;}
+    .downloads{grid-template-columns:1fr;}
   }
   @media(max-width:768px) {
     nav{padding:0 20px;} .container{padding:0 20px;}
@@ -268,6 +280,20 @@
         <div class="callout">
           <div class="callout-label">Design Outcome</div>
           <p>The modular subsystem approach decouples mechanism complexity from housing manufacture: the anchor block holds all complex geometry on a small, easily-machined aluminum part, while the housing requires only a simple rectangular pocket. This split improves yield, lowers cost, and allows the latch to be quality-checked as an isolated subassembly before final integration.</p>
+        </div>
+
+        <h2>Project Files</h2>
+        <p>The full CAD model of the latch subsystem is available for download as a Parasolid file — the neutral CAD interchange format compatible with SOLIDWORKS, Creo, NX, Inventor, Fusion 360, and most other major CAD packages.</p>
+
+        <div class="downloads">
+          <a href="assets/Dual_Wedge_Slider_Mechanism.x_t" class="download-card" download>
+            <div class="download-icon">.X_T</div>
+            <div class="download-info">
+              <div class="download-title">CAD Model — Parasolid</div>
+              <div class="download-meta">Dual_Wedge_Slider_Mechanism.x_t · 433 KB</div>
+            </div>
+            <div class="download-arrow">↓</div>
+          </a>
         </div>
 
         <h2>Recommendations & Next Steps</h2>
