@@ -84,6 +84,17 @@
   .component-name { font-size:15px; font-weight:600; color:var(--text); margin-bottom:4px; }
   .component-detail { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); line-height:1.5; }
 
+  /* Downloads */
+  .downloads { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0 32px; }
+  .download-card { display:flex; align-items:center; gap:18px; padding:20px 22px; background:var(--bg-card); border:1px solid var(--border); border-radius:3px; text-decoration:none; color:inherit; transition:all .3s ease; }
+  .download-card:hover { border-color:var(--accent-dim); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); background:rgba(77,141,245,0.04); }
+  .download-icon { width:44px; height:44px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--accent-glow); border:1px solid var(--accent-dim); border-radius:3px; color:var(--accent-bright); font-family:'DM Mono',monospace; font-size:10px; font-weight:600; letter-spacing:0.5px; }
+  .download-info { flex:1; min-width:0; }
+  .download-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:2px; }
+  .download-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
+  .download-arrow { color:var(--text-muted); font-size:16px; transition:all .3s; }
+  .download-card:hover .download-arrow { color:var(--accent-bright); transform:translateX(2px); }
+
   .project-nav { display:flex; justify-content:space-between; padding:48px 0; border-top:1px solid var(--border); position:relative; z-index:1; gap:24px; }
   .project-nav-link { text-decoration:none; color:var(--text-dim); transition:color 0.3s; }
   .project-nav-link:hover { color:var(--accent-bright); }
@@ -104,6 +115,7 @@
     .project-sidebar{position:static;}
     .figure-pair{grid-template-columns:1fr;}
     .stat-row{grid-template-columns:1fr;}
+    .downloads{grid-template-columns:1fr;}
   }
   @media(max-width:768px) {
     nav{padding:0 20px;} .container{padding:0 20px;}
@@ -356,8 +368,30 @@
         <p>The assembly counts <strong>17 unique part numbers</strong>: 7 custom mechanical parts, 4 drive components, 8 bearings/retaining rings, 1 linear actuator subassembly, and 1 acrylic feed tube — plus 24 fasteners and washers across two sizes. Assembly relies on poka-yoke features rather than careful instructions:</p>
         <p>The <strong>motor bolt pattern</strong> is asymmetric (16 × 19 mm rectangle), allowing only two valid orientations and preventing 90° misinstall. The <strong>two hood side plates are the same part</strong> — flipped on install, so one SKU and one tool setup serves both. Bearing fits use H7 OD on the bearing and H8 hole in the frame — slip fit with controlled depth, no press required. The hood liner is captive between the side plates: it physically can't come loose without removing both plates first. One M6 hole on the ISO 9409 pattern is held to a tighter tolerance and accepts a dowel pin, locating the entire pattern precisely against the robot flange.</p>
 
+        <h2>Project Files</h2>
+        <p>The full CAD model and the Python trajectory model are available for download. The Parasolid file is the neutral CAD interchange format and can be opened in SOLIDWORKS, Creo, NX, Inventor, Fusion 360, and most other major CAD packages. The Python script is self-contained and reproduces every figure on this page when run with NumPy, SciPy, and Matplotlib installed.</p>
+
+        <div class="downloads">
+          <a href="assets/Ping_Pong_Ball_Launcher.x_t" class="download-card" download>
+            <div class="download-icon">.X_T</div>
+            <div class="download-info">
+              <div class="download-title">CAD Model — Parasolid</div>
+              <div class="download-meta">Ping_Pong_Ball_Launcher.x_t · 4.6 MB</div>
+            </div>
+            <div class="download-arrow">↓</div>
+          </a>
+          <a href="assets/trajectory_model.py" class="download-card" download>
+            <div class="download-icon">.PY</div>
+            <div class="download-info">
+              <div class="download-title">Trajectory Model — Python</div>
+              <div class="download-meta">trajectory_model.py · 14.5 KB</div>
+            </div>
+            <div class="download-arrow">↓</div>
+          </a>
+        </div>
+
         <h2>What's Next</h2>
-        <p>Total engineering time on this design pass was 13 hours: concept research (1 h), physics derivation and trajectory model (3 h), CAD design and iteration (3.5 h), decision matrix and write-up (1 h), engineering calculations (1 h), BOM and cost analysis (1.5 h), GD&T drawing (1 h), and presentation (1 h). With more time the priorities are: build a hardware prototype to validate the trajectory model and calibrate slip efficiency η experimentally; FEA-driven sizing to trim weight and power; a designed ball-feed mechanism (out of scope here but the obvious next subsystem); and PID-tuned spin-up to reduce energy lost between successive shots.</p>
+        <p>With more development time the priorities are: build a hardware prototype to validate the trajectory model and calibrate slip efficiency η experimentally; FEA-driven sizing to trim weight and power; a designed ball-feed mechanism (out of scope here but the obvious next subsystem); and PID-tuned spin-up to reduce energy lost between successive shots.</p>
       </div>
     </div>
   </div>
